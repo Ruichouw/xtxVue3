@@ -8,4 +8,8 @@
 
 <script setup></script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+div {
+  color: $helpColor;
+}
+</style>
