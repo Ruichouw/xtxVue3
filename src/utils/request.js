@@ -1,9 +1,9 @@
 import { useUserStore } from '@/stores'
 import axios from 'axios'
 import router from '@/router'
-import { ElMessage } from 'element-plus'
+// import { ElMessage } from 'element-plus'
 
-const baseURL = 'https://api.longfish.site'
+const baseURL = 'http://pcapi-xiaotuxian-front-devtest.itheima.net'
 
 const instance = axios.create({
   baseURL,
@@ -23,15 +23,15 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   (res) => {
-    if (res.data.code === 0) {
+    if (res.data.code === '1') {
       return res
     }
-    ElMessage({ message: res.data.message || '服务异常', type: 'error' })
+    ElMessage({ message: res.data.msg || '服务异常', type: 'error' })
     return Promise.reject(res.data)
   },
   (err) => {
     ElMessage({
-      message: err.response.data.message || '服务异常',
+      message: err.response.data.msg || '服务异常',
       type: 'error'
     })
     console.log(err)
