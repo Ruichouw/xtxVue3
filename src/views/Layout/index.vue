@@ -1,8 +1,12 @@
+<script setup>
+import LayoutNav from './components/LayoutNav.vue'
+import LayoutHeader from './components/LayoutHeader.vue'
+import LayoutFooter from './components/LayoutFooter.vue'
+</script>
+
 <template>
-  <div>我是layout</div>
-  <router-view></router-view>
+  <LayoutNav />
+  <LayoutHeader />
+  <router-view />
+  <LayoutFooter />
 </template>
-
-<script setup></script>
-
-<style lang="scss" scoped></style>
