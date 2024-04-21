@@ -4,8 +4,8 @@
     <homeBanner></homeBanner>
   </div>
 
-  <homehot></homehot>
   <homenew></homenew>
+  <homehot></homehot>
   <homeproduct></homeproduct>
 </template>
 
