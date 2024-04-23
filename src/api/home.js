@@ -5,3 +5,5 @@ export const homeBannerAPI = () => request.get('/home/banner')
 export const homeNewAPI = () => request.get('/home/new')
 // 好物推荐接口
 export const homeHotAPI = () => request.get('/home/hot')
+// 获取所有商品接口
+export const homeGoodsAPI = () => request.get('/home/goods')
