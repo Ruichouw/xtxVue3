@@ -2,11 +2,13 @@
 import homePanel from './homePanel.vue'
 import { homeNewAPI } from '@/api/home'
 import { ref } from 'vue'
+
 const newList = ref([])
 const getNewList = async () => {
   const res = await homeNewAPI()
   newList.value = res.data.result
 }
+
 getNewList()
 </script>
 
