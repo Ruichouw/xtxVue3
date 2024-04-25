@@ -27,6 +27,10 @@ const router = createRouter({
         {
           path: 'category/sub/:id',
           component: subCategory
+        },
+        {
+          path: 'detail/:id',
+          component: () => import('@/views/Detail/index.vue')
         }
       ]
     },
@@ -34,7 +38,13 @@ const router = createRouter({
       path: '/login',
       component: Login
     }
-  ]
+  ],
+  // 定制路由行为
+  scrollBehavior() {
+    return {
+      top: 0
+    }
+  }
 })
 
 export default router
