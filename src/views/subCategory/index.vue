@@ -35,6 +35,23 @@ const tabChange = () => {
   reqData.value.page = 1
   getGoodList()
 }
+
+// 无限滚动加载更多
+// 使用ui的v-infinite-scroll（给滚动列表监听是否滚动底部）
+// 和infinite-scroll-disabled（是否禁用监听事件）
+// 到底就让页数加一，再重新获取新数据，将新数据和老数据进行拼接，这里用到了展开运算符进行拼接
+const flag = ref(false)
+const loadMore = async () => {
+  // console.log('加载更多')
+  reqData.value.page++
+  // console.log(reqData.value.page)
+  const res = await getSubCategoryAPI(reqData.value)
+  goodList.value = [...goodList.value, ...res.data.result.items]
+  if (res.data.result.items.length === 0) {
+    // 如果没有数据了，就停止加载更多
+    flag.value = true
+  }
+}
 </script>
 
 <template>
@@ -55,7 +72,11 @@ const tabChange = () => {
         <el-tab-pane label="最高人气" name="orderNum"></el-tab-pane>
         <el-tab-pane label="评论最多" name="evaluateNum"></el-tab-pane>
       </el-tabs>
-      <div class="body">
+      <div
+        class="body"
+        v-infinite-scroll="loadMore"
+        :infinite-scroll-disabled="flag"
+      >
         <!-- 商品列表-->
         <goods-item v-for="item in goodList" :key="item.id" :goods="item" />
       </div>
