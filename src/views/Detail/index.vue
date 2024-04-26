@@ -2,6 +2,8 @@
 import { getDetail } from '@/api/detail.js'
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
+import hotList from './components/hotList.vue'
+import goodsItem from '@/views/Home/components/goodsItem.vue'
 
 const route = useRoute()
 const goods = ref({})
@@ -127,7 +129,10 @@ getGoods()
               </div>
             </div>
             <!-- 24热榜+专题推荐 -->
-            <div class="goods-aside"></div>
+            <div class="goods-aside">
+              <hotList type="1"></hotList>
+              <hotList type="2"></hotList>
+            </div>
           </div>
         </div>
       </div>
