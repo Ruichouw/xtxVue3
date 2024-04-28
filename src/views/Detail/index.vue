@@ -3,7 +3,7 @@ import { getDetail } from '@/api/detail.js'
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 import hotList from './components/hotList.vue'
-import goodsItem from '@/views/Home/components/goodsItem.vue'
+import imgView from '@/components/imgView.vue'
 
 const route = useRoute()
 const goods = ref({})
@@ -42,7 +42,7 @@ getGoods()
           <div class="goods-info">
             <div class="media">
               <!-- 图片预览区 -->
-
+              <imgView></imgView>
               <!-- 统计数量 -->
               <ul class="goods-sales">
                 <li>
