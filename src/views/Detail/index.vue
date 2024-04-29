@@ -3,7 +3,7 @@ import { getDetail } from '@/api/detail.js'
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 import hotList from './components/hotList.vue'
-import imgView from '@/components/imgView.vue'
+
 
 const route = useRoute()
 const goods = ref({})
@@ -12,6 +12,10 @@ const getGoods = async () => {
   goods.value = res.data.result
 }
 getGoods()
+
+const skuChange = (sku) => {
+  console.log(sku)
+}
 </script>
 
 <template>
@@ -42,7 +46,7 @@ getGoods()
           <div class="goods-info">
             <div class="media">
               <!-- 图片预览区 -->
-              <imgView></imgView>
+              <XtximgView :imageList="goods.mainPictures"></XtximgView>
               <!-- 统计数量 -->
               <ul class="goods-sales">
                 <li>
@@ -91,7 +95,7 @@ getGoods()
                 </dl>
               </div>
               <!-- sku组件 -->
-
+              <Xtxsku :goods="goods" @change="skuChange"></Xtxsku>
               <!-- 数据组件 -->
 
               <!-- 按钮组件 -->
