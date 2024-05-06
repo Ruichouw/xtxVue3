@@ -1,8 +1,10 @@
 <script setup>
 import { ref } from 'vue'
-import { LoginAPI } from '@/api/user'
+import { useUserStore } from '@/stores'
 import { useRouter } from 'vue-router'
+
 const router = useRouter()
+const userStore = useUserStore()
 const form = ref({
   account: '',
   password: '',
@@ -10,18 +12,15 @@ const form = ref({
 })
 // 登录测试账号13012345683+123456
 const formRef = ref(null)
-const Login = async () => {
-  const res = await LoginAPI(form.value)
-  console.log(res)
-  ElMessage.success('登录成功')
-  router.replace('/')
-}
+
 const onLogin = () => {
-  formRef.value.validate((valid) => {
+  formRef.value.validate(async (valid) => {
     // valid:  表示所有表单校验通过，返回true
     if (valid) {
       console.log(form.value)
-      Login()
+      await userStore.Login(form.value)
+      ElMessage.success('登录成功')
+      router.replace('/')
     }
   })
 }

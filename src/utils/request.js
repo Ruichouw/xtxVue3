@@ -13,8 +13,8 @@ const instance = axios.create({
 instance.interceptors.request.use(
   (config) => {
     const userStore = useUserStore()
-    if (userStore.token) {
-      config.headers.Authorization = userStore.token
+    if (userStore.userInfo.token) {
+      config.headers.Authorization = userStore.userInfo.token
     }
     return config
   },
@@ -30,13 +30,18 @@ instance.interceptors.response.use(
     return Promise.reject(res.data)
   },
   (err) => {
+    const userStore = useUserStore()
+
     ElMessage({
       message: err.response.data.msg || '服务异常',
       type: 'error'
     })
     console.log(err)
+    // 401tokon失效处理
+    // 返回登录页，清除用户信息
     if (err.response?.status === 401) {
       router.push('/login')
+      userStore.removeUserInfo()
     }
     return Promise.reject(err)
   }
