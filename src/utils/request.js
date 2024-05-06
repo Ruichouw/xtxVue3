@@ -15,6 +15,7 @@ instance.interceptors.request.use(
     const userStore = useUserStore()
     if (userStore.userInfo.token) {
       config.headers.Authorization = userStore.userInfo.token
+      // 请求头携带toknen,则token失效后不能访问详情页，直接退出登录
     }
     return config
   },
