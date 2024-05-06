@@ -5,7 +5,7 @@ const cartstore = useCartStore()
 
 <template>
   <div class="cart">
-    <a class="curr" href="javascript:;">
+    <a class="curr" href="javascrcartstoreipt:;">
       <i class="iconfont icon-cart"></i><em>{{ cartstore.cartList.length }}</em>
     </a>
     <div class="layer">
@@ -26,7 +26,7 @@ const cartstore = useCartStore()
           </RouterLink>
           <i
             class="iconfont icon-close-new"
-            @click="store.delCart(i.skuId)"
+            @click="cartstore.delCart(i.skuId)"
           ></i>
         </div>
       </div>
