@@ -1,6 +1,11 @@
 <script setup>
 import { useCartStore } from '@/stores'
+import { useRouter } from 'vue-router'
 const cartstore = useCartStore()
+const router = useRouter()
+const goCart = () => {
+  router.push('/cart')
+}
 </script>
 
 <template>
@@ -32,10 +37,12 @@ const cartstore = useCartStore()
       </div>
       <div class="foot">
         <div class="total">
-          <p>共 10 件商品</p>
-          <p>&yen; 100.00</p>
+          <p>共 {{ cartstore.allCount }} 件商品</p>
+          <p>&yen;{{ cartstore.allPrice.toFixed(2) }}</p>
         </div>
-        <el-button size="large" type="primary">去购物车结算</el-button>
+        <el-button size="large" type="primary" @click="goCart"
+          >去购物车结算</el-button
+        >
       </div>
     </div>
   </div>
