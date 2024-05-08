@@ -35,3 +35,9 @@ export const mergeCartAPI = (data) => {
     data
   })
 }
+// 获取订单详情接口
+export const getCheckoutInfoAPI = () => {
+  return request({
+    url: '/member/order/pre'
+  })
+}
