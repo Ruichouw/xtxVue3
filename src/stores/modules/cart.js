@@ -11,13 +11,16 @@ export const useCartStore = defineStore(
     const userStore = useUserStore()
     // 1. 定义state - cartList
     const cartList = ref([])
+    const getNewCartList = async () => {
+      const res = await getCartAPI()
+      cartList.value = res.data.result
+    }
     // 2. 定义action - addCart
     const addCart = async (goods) => {
       const { skuId, count } = goods
       if (userStore.userInfo.token) {
         await insertCartAPI({ skuId, count })
-        const res = await getCartAPI()
-        cartList.value = res.data.result
+        getNewCartList()
       } else {
         console.log('添加', goods)
         // 添加购物车操作
@@ -40,8 +43,7 @@ export const useCartStore = defineStore(
     const delCart = async (skuId) => {
       if (userStore.userInfo.token) {
         await delCartAPI([skuId])
-        const res = await getCartAPI()
-        cartList.value = res.data.result
+        getNewCartList()
       } else {
         cartList.value = cartList.value.filter((item) => item.skuId !== skuId)
       }
@@ -96,7 +98,8 @@ export const useCartStore = defineStore(
       allCheck,
       checkedCount,
       checkedPrice,
-      clearCart
+      clearCart,
+      getNewCartList
     }
   },
   {
